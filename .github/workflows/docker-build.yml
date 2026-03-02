@@ -1,0 +1,18 @@
+name: Docker Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build images
+        run: |
+          docker build -t kfrp-api ./services/api_gateway
+          docker build -t kfrp-ingestion ./services/ingestion
+          docker build -t kfrp-retrieval ./services/retrieval
