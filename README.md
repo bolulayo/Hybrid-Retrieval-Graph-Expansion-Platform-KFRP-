@@ -1,6 +1,5 @@
 # Knowledge Fusion Retrieval Platform (KFRP)
 
-A **portfolio-grade** backend project you can confidently walk through in interviews to demonstrate:
 
 - Architectural thinking & integration pattern design
 - Complex-domain data modeling + normalization
