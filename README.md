@@ -122,15 +122,7 @@ docker compose run --rm retrieval pytest
 
 ---
 
-## 🧭 Suggested interview walkthrough (5–7 minutes)
-1. Start with `/docs/architecture.md` (problem, constraints, components).
-2. Point to `/docs/adrs/` (how you make decisions).
-3. Show `/docs/data-model.md` (canonical model + graph mapping).
-4. Demo `/v1/ingest` and `/v1/query` via curl.
-5. Open Neo4j Browser and show a simple `MATCH (e:Entity) RETURN e LIMIT 10`.
-6. Mention scalability levers (async ingestion, caches, read replicas, vector index tuning).
 
----
 
 ## License
 MIT
