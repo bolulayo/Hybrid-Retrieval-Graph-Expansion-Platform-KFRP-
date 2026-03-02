@@ -1,11 +1,14 @@
 from sqlalchemy import text
 from ..shared.embedding import toy_embed
 
+def to_pgvector(vec):
+    # pgvector accepts: '[0.1,0.2,0.3]'
+    return "[" + ",".join(f"{float(x):.4f}" for x in vec) + "]"
+
 def hybrid_search(db, query: str, top_k: int = 5):
-    """Hybrid retrieval: combine FTS rank + vector similarity (toy embedding) in Postgres.
-    This is a simplified scoring approach for interview/demo purposes.
-    """
-    q_emb = toy_embed(query)
+    """Hybrid retrieval: combine FTS rank + vector similarity (toy embedding) in Postgres."""
+    q_emb = to_pgvector(toy_embed(query))
+
     rows = db.execute(
         text("""
             WITH candidates AS (
@@ -15,7 +18,7 @@ def hybrid_search(db, query: str, top_k: int = 5):
                 c.chunk_index,
                 c.content,
                 ts_rank(c.tsv, plainto_tsquery('english', :q)) AS fts_rank,
-                (c.embedding <-> :q_emb) AS vec_dist
+                (c.embedding <-> (:q_emb)::vector) AS vec_dist
               FROM chunks c
               WHERE c.tsv @@ plainto_tsquery('english', :q)
               ORDER BY fts_rank DESC
@@ -33,14 +36,13 @@ def hybrid_search(db, query: str, top_k: int = 5):
         {"q": query, "q_emb": q_emb, "k": top_k},
     ).mappings().all()
 
-    # Fallback: if FTS returns nothing, do pure vector scan (demo only; real system uses ANN index)
     if not rows:
         rows = db.execute(
             text("""
                 SELECT id, document_id, chunk_index, content,
                        0.0 AS fts_rank,
-                       (embedding <-> :q_emb) AS vec_dist,
-                       (1.0 - LEAST((embedding <-> :q_emb), 1.0)) AS score
+                       (embedding <-> (:q_emb)::vector) AS vec_dist,
+                       (1.0 - LEAST((embedding <-> (:q_emb)::vector), 1.0)) AS score
                 FROM chunks
                 ORDER BY vec_dist ASC
                 LIMIT :k
