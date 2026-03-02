@@ -13,7 +13,7 @@ A **portfolio-grade** backend project you can confidently walk through in interv
 
 ---
 
-## 🔥 Talking points (what interviewers look for)
+
 
 ### Architectural thinking
 - **Modular monolith vs microservices**: this repo is **service-oriented** but intentionally small—each service is deployable independently, but everything can run in one `docker compose` for demo.
@@ -87,7 +87,7 @@ flowchart LR
 
 ---
 
-## 📁 Repo map (the “examples” you can point to in your interview)
+## 📁 Repo map 
 
 ### Architecture + tradeoffs
 - **Architecture overview & diagrams**: [`/docs/architecture.md`](docs/architecture.md)
