@@ -8,7 +8,7 @@ def record_event(db, aggregate_type: str, aggregate_id, event_type: str, payload
     db.execute(
         text("""
             INSERT INTO outbox_events (id, aggregate_type, aggregate_id, event_type, payload)
-            VALUES (:id, :atype, :aid, :etype, :payload::jsonb)
+            VALUES (:id, :atype, :aid, :etype, CAST(:payload AS jsonb))
         """),
         {
             "id": str(event_id),
