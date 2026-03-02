@@ -1,3 +1,6 @@
+
+![CI](https://github.com/bolulayo/Hybrid-Retrieval-Graph-Expansion-Platform-KFRP-/actions/workflows/ci.yml/badge.svg)
+![Docker Build](https://github.com/bolulayo/Hybrid-Retrieval-Graph-Expansion-Platform-KFRP-/actions/workflows/docker-build.yml/badge.svg)
 # Knowledge Fusion Retrieval Platform (KFRP)
 
 
