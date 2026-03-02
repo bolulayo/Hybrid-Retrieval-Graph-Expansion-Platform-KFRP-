@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IngestRequest",
+  "type": "object",
+  "required": [
+    "idempotency_key",
+    "source",
+    "document"
+  ],
+  "properties": {
+    "idempotency_key": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "document": {
+      "type": "object",
+      "required": [
+        "external_id",
+        "title",
+        "content"
+      ],
+      "properties": {
+        "external_id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "demo-001",
+  "source": "crm",
+  "document": {
+    "external_id": "CASE-12345",
+    "title": "Customer Case Notes: Payment Dispute",
+    "content": "Alice reported that Acme Corp issued a chargeback. Bob from Acme Corp requested evidence. The case was handled in Dallas and escalated to Compliance.",
+    "metadata": {
+      "priority": "high",
+      "channel": "email"
+    }
+  }
+}

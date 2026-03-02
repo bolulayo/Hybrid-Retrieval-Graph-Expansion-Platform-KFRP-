@@ -1,0 +1,5 @@
+{
+  "query": "chargeback evidence requested by Acme",
+  "top_k": 5,
+  "expand_graph": true
+}
